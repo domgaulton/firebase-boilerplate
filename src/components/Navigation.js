@@ -15,7 +15,7 @@ class Navigation extends Component {
             </Link>
           </li>
           <li>
-            <Link className="bz-navigation__item" to={`/settings/${this.props.userId}`}>
+            <Link className="bz-navigation__item" to='/settings'>
               <i className="material-icons">new_releases</i>
               <span>Settings</span>
             </Link>

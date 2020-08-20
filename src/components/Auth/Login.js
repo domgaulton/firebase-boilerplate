@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { ContextUserConsumer } from "../../context/ContextFirebaseUserProvider";
-import { Redirect } from 'react-router-dom';
 import { withRouter } from 'react-router-dom';
 
 class Login extends Component {
@@ -11,6 +10,9 @@ class Login extends Component {
       resetPassword: false,
       email: '',
       password: '',
+      createName: '',
+      createEmail: '',
+      createPassword: '',
     };
   }
 
@@ -32,6 +34,7 @@ class Login extends Component {
     })
   }
 
+
   handleSubmit = e => {
     e.preventDefault();
     if (this.state.resetPassword) {
@@ -48,6 +51,11 @@ class Login extends Component {
         password: '',
       })
     }
+  }
+
+  handleCreateUser = e => {
+    e.preventDefault();
+    this.props.createAuthUser(this.state.createEmail, this.state.createPassword, this.state.createName)
   }
 
 
@@ -88,8 +96,49 @@ class Login extends Component {
         <p onClick={this.resetPassword}>{this.state.resetPassword ? 'Back to Login' : 'Forgot Password - Reset Here'}</p>
       </div>
     ) : (
-      <Redirect push to="/register" />
-    );
+      <div className="container">
+        <h1>Register</h1>
+          <form
+            onSubmit={e => this.handleCreateUser(e)}
+            className="auth-form"
+          >
+            <input
+              className="auth-form__item auth-form__item--text-input"
+              type='text'
+              placeholder='Name'
+              name="createName"
+              value={this.state.createName}
+              onChange={e => this.handleInputChange(e)}
+            />
+            <input
+              className="auth-form__item auth-form__item--text-input"
+              type='email'
+              placeholder='Email'
+              name="createEmail"
+              value={this.state.createEmail}
+              onChange={e => this.handleInputChange(e)}
+            />
+            <input
+              className="auth-form__item auth-form__item--text-input"
+              type='password'
+              placeholder='Password'
+              name="createPassword"
+              value={this.state.createPassword}
+              onChange={e => this.handleInputChange(e)}
+            />
+            <input
+              className="auth-form__item auth-form__item--submit"
+              type='submit'
+              value="Register"
+              disabled={
+                this.state.createName === '' ||
+                this.state.createEmail  === '' ||
+                this.state.createPassword === ''}
+            />
+          </form>
+          <p onClick={this.toggleLoginCreateUser}>Have an account already? Login here</p>
+        </div>
+      );
   }
 }
 

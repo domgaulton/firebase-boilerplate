@@ -26,10 +26,6 @@ class FirebaseUserProvider extends Component {
       setUserData: (data) => this.handleSetUserData(data),
       updateUserData: (userId, fieldName, update) => this.handleUpdateUserData(userId, fieldName, update),
 
-      // Friends
-      addNewFriend: (username) => this.handleAddNewFriend(username),
-      confirmFriendRequest: (userId) => this.handleConfirmFriendRequest(userId),
-
       // Settings
       resetPassword: (email) => this.handleResetPassword(email),
     };
@@ -49,12 +45,6 @@ class FirebaseUserProvider extends Component {
     });
   }
 
-  componentDidUpdate(prevProps, prevState){
-    if (this.state.userData && this.state.userData.friendsPending && this.state.userData.friendsPending !== prevState.userData.friendsPending && this.state.userData.friendsPending.length) {
-      this.props.addMessage("New friend request");
-    }
-  }
-
   // // // // // //
   // Auth
   // // // // // //
@@ -70,6 +60,7 @@ class FirebaseUserProvider extends Component {
     });
   }
 
+  // Create auth user, if successful add them to database collection
   handleCreateAuthUser = (email, password, name) => {
     auth.createUserWithEmailAndPassword(email, password)
     .then(response => {
@@ -86,9 +77,11 @@ class FirebaseUserProvider extends Component {
 
   handleCreateDatabaseUser = (userId, name) => {
     firestore.collection(usersCollection).doc(userId).set({
+      // Set user details in here for collection
       name: name,
     })
     .then(() => {
+      // attach user data to app
       this.handleSetUserData(userId);
     })
     .catch(error => {
@@ -140,7 +133,7 @@ class FirebaseUserProvider extends Component {
   // // // // // //
 
 
-  // Set user data in react state
+  // Set user data in react state (attach user data to app)
   handleSetUserData = userId => {
     this.setState({
       userId: userId
