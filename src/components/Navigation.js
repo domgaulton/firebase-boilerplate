@@ -6,16 +6,16 @@ class Navigation extends Component {
 
   render(){
     return this.props.userLoggedIn && (
-      <nav className="bz-navigation">
-        <ul className="bz-navigation__wrapper">
+      <nav className="navigation">
+        <ul className="navigation__wrapper">
           <li>
-            <Link className="bz-navigation__item" to={`/user/${this.props.userId}`}>
+            <Link className="navigation__item" to={`/user/${this.props.userId}`}>
               <i className="material-icons">person</i>
               <span>Home</span>
             </Link>
           </li>
           <li>
-            <Link className="bz-navigation__item" to='/settings'>
+            <Link className="navigation__item" to='/settings'>
               <i className="material-icons">new_releases</i>
               <span>Settings</span>
             </Link>

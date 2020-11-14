@@ -26,3 +26,7 @@ yarn-error.log*
 
 # other
 .firebase
+.firebaserc
+.firebase.json
+.firestore.indexes.json
+.storeage.rules

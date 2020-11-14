@@ -92,8 +92,8 @@ class Login extends Component {
             disabled={this.state.email === ''}
           />
         </form>
-        <p onClick={this.toggleLoginCreateUser}>No login? Register here</p>
-        <p onClick={this.resetPassword}>{this.state.resetPassword ? 'Back to Login' : 'Forgot Password - Reset Here'}</p>
+        <p onClick={this.toggleLoginCreateUser}>No login? <u>Register here</u></p>
+        <p onClick={this.resetPassword}><u>{this.state.resetPassword ? 'Back to Login' : 'Forgot Password - Reset Here'}</u></p>
       </div>
     ) : (
       <div className="container">
