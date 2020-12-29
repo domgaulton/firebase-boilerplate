@@ -41,9 +41,12 @@ service cloud.firestore {
 ### Firebase Deploy Instructions
 https://firebase.google.com/docs/hosting/multisites?authuser=0#set_up_deploy_targets
 * Navigate to the root of your project;
-1. `firebase login`
-2. `firebase init`
-3. `firebase deploy` || `firebase deploy --only hosting:[specific-hosting-name]`
+1. Check your `package.json` to make sure the `"homepage": "https://xyz.web.app/"` links to your firebase web app url.
+2. `firebase login`
+3. `firebase init`
+4. `firebase deploy` || `firebase deploy --only hosting:[specific-hosting-name]`
+
+* Al alternative to this has been added a script - `npm run firebase-build-deploy`
 
 ### Project set up / Walkthrough
 
